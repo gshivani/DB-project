@@ -16,11 +16,14 @@ import org.json.simple.parser.ParseException;
 
 public class FlightWebServiceClient
 {
-	static String urlApi= "http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/US/USD/en-US/BOS/SFO/2014-11-25/2014-11-25?apiKey=no134842991214289586413891281748";
 	
-	public static void parseJSON()
+	
+	public void parseJSON(String origin, String destination)
 	{
 		try {
+			String urlApi= "http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/US/USD/en-US/"+
+		                   origin+"/"+destination+"/2014-11-25/2014-11-25?apiKey=no134842991214289586413891281748";
+			
 			URL url = new URL(urlApi);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
@@ -70,6 +73,6 @@ public class FlightWebServiceClient
 	public static void main(String args[])throws IOException
 	{
 		FlightWebServiceClient client = new FlightWebServiceClient();
-		client.parseJSON();
+		client.parseJSON("BOS","LAX");
 	}
 }

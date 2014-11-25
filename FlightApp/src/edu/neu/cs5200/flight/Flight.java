@@ -11,7 +11,10 @@ public class Flight implements Serializable{
 	@Id
 	private int CarrierId;
 	private String Name;
+
 	
+
+
 	public int getCarrierId() {
 		return CarrierId;
 	}
@@ -28,10 +31,13 @@ public class Flight implements Serializable{
 		Name = name;
 	}
 
-	public Flight(int carrierId, String name) {
+
+
+	public Flight(int carrierId, String name, String origin, String destination) {
 		super();
-		CarrierId = carrierId;
-		Name = name;
+		this.CarrierId = carrierId;
+		this.Name = name;
+
 	}
 
 	public Flight() {
