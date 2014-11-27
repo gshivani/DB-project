@@ -31,7 +31,14 @@ public class Flight implements Serializable{
 		Name = name;
 	}
 
-
+	public Flight(int carrierId, String name)
+	{
+		super();
+		this.CarrierId = carrierId;
+		this.Name = name;
+		
+	}
+	
 
 	public Flight(int carrierId, String name, String origin, String destination) {
 		super();

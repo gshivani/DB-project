@@ -19,7 +19,6 @@
 		FlightWebServiceClient client = new FlightWebServiceClient();
 		client.parseJSON(origin,destination);
 	}
-
 	
 	%>
 	
