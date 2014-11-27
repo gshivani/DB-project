@@ -19,11 +19,11 @@ import org.json.simple.parser.ParseException;
 
 public class FlightWebServiceClient
 {
-	public void parseJSON(String origin, String destination)
+	public void parseJSON(String origin, String destination, String departureDate, String arrivalDate)
 	{
 		DSApiCalls dsc = new DSApiCalls();
-		String json = dsc.callApi(origin,destination);
-		System.out.println(json);s
+		String json = dsc.callApi(origin,destination, departureDate, arrivalDate);
+		System.out.println(json);
 		
 		JSONParser parser = new JSONParser();
 		
@@ -112,6 +112,6 @@ public class FlightWebServiceClient
 	public static void main(String args[])throws IOException
 	{
 		FlightWebServiceClient client = new FlightWebServiceClient();
-		client.parseJSON("BOS","LAX");
+		client.parseJSON("BOS","LAX", "2014-12-03","2014-12-10");
 	}
 }

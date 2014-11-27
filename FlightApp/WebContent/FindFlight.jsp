@@ -5,7 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+  });
+  
+  $(function() {
+	    $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	  });
+  </script>
 </head>
+
 <body>
 <div class="container">
 
@@ -13,11 +28,13 @@
 <% 
 	String origin = request.getParameter("origin");
 	String destination = request.getParameter("destination");
+	String departureDate = request.getParameter("depatureDate");
+	String arrivalDate = request.getParameter("arrivalDate");
 	
 	if(origin != null)
 	{
 		FlightWebServiceClient client = new FlightWebServiceClient();
-		client.parseJSON(origin,destination);
+		client.parseJSON(origin,destination,departureDate,arrivalDate);
 	}
 	
 	%>
@@ -28,9 +45,9 @@
 		<input name="origin" class="form-control" value=""/>
 		Destination:
 		<input name="destination"  class="form-control"/>
-		<input type ="submit" value="DisplayFlight"/>
-	
-		
+	    Departure Date: <input name = "depatureDate" type="text" id="datepicker">
+	    Arrival Date: <input name = "arrivalDate" type="text" id="datepicker1">
+	    <input type ="submit" value="DisplayFlight"/>
 				
 	</form>	
 </div>

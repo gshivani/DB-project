@@ -5,7 +5,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 public class DSApiCalls {
 
 	
-public String callApi(String origin,String destination) {
+public String callApi(String origin, String destination, String departureDate, String arrivalDate) {
 		
 		// TODO Auto-generated method stub
 		//
@@ -27,7 +27,7 @@ public String callApi(String origin,String destination) {
         
 		DSCommHandler dsC = new DSCommHandler();
 		String token = dsC.getAuthToken("https://api.test.sabre.com",encodedClientIdSecret);
-		String response = dsC.sendRequest("https://api.test.sabre.com/v1/shop/flights?origin=BOS&destination=LAX&departuredate=2014-12-03&returndate=2014-12-10&onlineitinerariesonly=N&limit=10&offset=1&eticketsonly=N&sortby=totalfare&order=asc&sortby2=departuretime&order2=asc&pointofsalecountry=US", token);
+		String response = dsC.sendRequest("https://api.test.sabre.com/v1/shop/flights?origin="+origin+"&destination="+destination+"&departuredate="+departureDate+"&returndate="+arrivalDate+"&onlineitinerariesonly=N&limit=10&offset=1&eticketsonly=N&sortby=totalfare&order=asc&sortby2=departuretime&order2=asc&pointofsalecountry=US", token);
 		//Display the response String
 		System.out.println("SDS Response: "+response);
 		
