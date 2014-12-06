@@ -18,15 +18,13 @@ public class User implements Serializable{
 	private String dob;
 	private String email;
 	private String status;
-	private int frequentfliermiles;
 	
 	public String getUsername() {
 		return username;
 	}
 
 	public User(String username, String password, String firstname,
-			String lastname, String dob, String email, String status,
-			int frequentfliermiles) {
+			String lastname, String dob, String email, String status) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -35,7 +33,7 @@ public class User implements Serializable{
 		this.dob = dob;
 		this.email = email;
 		this.status = status;
-		this.frequentfliermiles = frequentfliermiles;
+		
 	}
 
 	public User() {
@@ -92,14 +90,6 @@ public class User implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public int getFrequentfliermiles() {
-		return frequentfliermiles;
-	}
-
-	public void setFrequentfliermiles(int frequentfliermiles) {
-		this.frequentfliermiles = frequentfliermiles;
 	}
 
 	

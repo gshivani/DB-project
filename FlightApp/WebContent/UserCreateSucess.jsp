@@ -20,10 +20,15 @@ int frequentfliermiles = 0;
 
 if (username!= null)
 {
- User user1 = new User(username,password,firstname,lastname,dob,email,status,frequentfliermiles);
+ User user1 = new User(username,password,firstname,lastname,dob,email,status);
 
  UserDao dao = new UserDao();
  User user2 = dao.createUser(user1);
+ 
+ FrequentFlierMiles ffm1 = new FrequentFlierMiles(0, username);
+ FrequentFlierMilesDao daoFfm = new FrequentFlierMilesDao();
+ FrequentFlierMiles ffm2 = daoFfm.createFFM(ffm1);
+ 
 }
 
 %>

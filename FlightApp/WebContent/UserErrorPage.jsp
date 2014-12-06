@@ -7,20 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>User Login</h1>
 
-
-	<form action="UserProfile.jsp" method="get">
-		Username
-		<input name="username" class="form-control" />
-		Password
-		<input name="password"  class="form-control"/>
-		<input type ="submit" value="Login"/>
-   </form>
-		
-		<form action="Createuser.jsp" method="get">
-		<input type ="submit" value="Create Account"/>
-		</form>
-		
 </body>
 </html>

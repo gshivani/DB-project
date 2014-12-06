@@ -29,13 +29,19 @@ public class UserDao {
 		User user = null;
 		em.getTransaction().begin();
 		user= em.find(User.class, username);
+		if(user!=null && user.getUsername()!=null)
+		{
+			em.getTransaction().commit();
+			return user;
+		}
 		em.getTransaction().commit();
-		return user;
+		return null;
+		
 	}
 	
 	public static void main(String[] args) {
 		UserDao dao = new UserDao();
-		User u1 = new User("alicewonderland","alice123","alice","wonderland","1990-12-03","alice@wonderland","online",100);
+		User u1 = new User("alicewonderland","alice123","alice","wonderland","1990-12-03","alice@wonderland","online");
 		User u2 = dao.createUser(u1);
 		System.out.println(u2.getUsername());
 

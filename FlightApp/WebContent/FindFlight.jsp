@@ -21,26 +21,17 @@
   </script>
 </head>
 
+
 <body>
-<div class="container">
-
-
 <% 
-	String origin = request.getParameter("origin");
-	String destination = request.getParameter("destination");
-	String departureDate = request.getParameter("depatureDate");
-	String arrivalDate = request.getParameter("arrivalDate");
-	
-	if(origin != null)
-	{
-		FlightWebServiceClient client = new FlightWebServiceClient();
-		client.parseJSON(origin,destination,departureDate,arrivalDate);
-	}
-	
-	%>
-	
+if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") == "")) 
+{ 
+       response.sendRedirect("Logout.jsp");	
+} else {
+%>
+<div class="container">
 	<h1>Find Flight</h1>
-	<form action="FindFlight.jsp" method="get">
+	<form action="DisplayFlight.jsp" method="get">
 		Origin:
 		<input name="origin" class="form-control" value=""/>
 		Destination:
@@ -51,5 +42,9 @@
 				
 	</form>	
 </div>
+<%
+} %>
 </body>
+
+
 </html>

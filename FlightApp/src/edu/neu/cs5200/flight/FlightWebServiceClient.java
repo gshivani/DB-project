@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,14 +21,28 @@ import org.json.simple.parser.ParseException;
 
 public class FlightWebServiceClient
 {
-	public void parseJSON(String origin, String destination, String departureDate, String arrivalDate)
+	
+	 List<String> departureLocationCode;
+	 List<String> arrivalLocationCode;
+	 List<String> departureDateTime;
+	 List<String> arrivalDateTime;
+	 List<Integer> flightNumber;
+	 List<String> airlineCode;
+	 double amount;
+	 
+	 
+	public List<DisplayFlight> parseJSON(String origin, String destination, String departureDate, String arrivalDate)
 	{
+		
 		DSApiCalls dsc = new DSApiCalls();
 		String json = dsc.callApi(origin,destination, departureDate, arrivalDate);
 		System.out.println(json);
 		
 		JSONParser parser = new JSONParser();
 		
+		List<DisplayFlight> arr_display = new ArrayList<DisplayFlight>();
+		
+		 
 		try
 		{
 			JSONObject root = (JSONObject) parser.parse(json);
@@ -42,44 +58,63 @@ public class FlightWebServiceClient
 				 
 				 JSONArray originDestinationOptions = (JSONArray) originDestination.get("OriginDestinationOption");
 				 
+				 
+				 departureLocationCode = new ArrayList<String>();
+				 arrivalLocationCode = new ArrayList<String>();
+				 departureDateTime = new ArrayList<String>();
+				 arrivalDateTime = new ArrayList<String>();
+				 flightNumber = new ArrayList<Integer>();
+				 airlineCode = new ArrayList<String>();
+				 
 				 for(int j=0; j<originDestinationOptions.size();j++)
 				 {
 					 JSONObject firstOriginDestination = (JSONObject) originDestinationOptions.get(j);
 					 JSONArray flightsegment = (JSONArray) firstOriginDestination.get("FlightSegment");
 					 
 					 System.out.println(flightsegment.size());
+					 					 
 					 
 					 for(int k=0; k<flightsegment.size();k++)
 					 {
 						 JSONObject firstflightsegment =(JSONObject) flightsegment.get(k);
 						 JSONObject firstDepartureAirport = (JSONObject) firstflightsegment.get("DepartureAirport");
 						 
-						 String departureLocationCode = firstDepartureAirport.get("LocationCode").toString();
-						 System.out.println(departureLocationCode);
+						 
+						 String departureLocationCode1 = firstDepartureAirport.get("LocationCode").toString();
+						 departureLocationCode.add(departureLocationCode1);
+						 System.out.println(departureLocationCode.size());
 						 
 						 JSONObject firstArrivalAirport = (JSONObject) firstflightsegment.get("ArrivalAirport");
-						 String arrivalLocationCode = firstArrivalAirport.get("LocationCode").toString();
-						 System.out.println(arrivalLocationCode);
+						 String arrivalLocationCode1 = firstArrivalAirport.get("LocationCode").toString();
+						 arrivalLocationCode.add(arrivalLocationCode1);
+						 System.out.println(arrivalLocationCode.size());
 						 
-						 String departureDateTime = firstflightsegment.get("DepartureDateTime").toString();
-						 System.out.println(departureDateTime);
-						 
-						 
-						 String arrivalDateTime = firstflightsegment.get("ArrivalDateTime").toString();
-						 System.out.println(arrivalDateTime);
+						 String departureDateTime1 = firstflightsegment.get("DepartureDateTime").toString();
+						 departureDateTime.add(departureDateTime1);
+						 System.out.println(departureDateTime.size());
 						 
 						 
-						 int flightNumber = Integer.parseInt(firstflightsegment.get("FlightNumber").toString());
-						 System.out.println(flightNumber);
+						 String arrivalDateTime1 = firstflightsegment.get("ArrivalDateTime").toString();
+						 arrivalDateTime.add(arrivalDateTime1);
+						 System.out.println(arrivalDateTime.size());
+						 
+						 
+						 Integer flightNumber1 = Integer.parseInt(firstflightsegment.get("FlightNumber").toString());
+						 flightNumber.add(flightNumber1);
+						 System.out.println(flightNumber.size());
 						 
 						 JSONObject operatingAirline = (JSONObject) firstflightsegment.get("OperatingAirline");
-						 String airlineCode = operatingAirline.get("Code").toString();
-						 System.out.println(airlineCode);
+						 String airlineCode1 = operatingAirline.get("Code").toString();
+						 airlineCode.add(airlineCode1);
+						 System.out.println(airlineCode.size());
 						 
 					 }
 					 
-					 System.out.println(firstOriginDestination.get("ElapsedTime").toString());
-				 }
+					 }
+				 
+				 for(String dp : departureLocationCode)
+						System.out.println(dp);
+					
 				 
 				 JSONObject firstAirItineraryPriceInfo = (JSONObject) firstPricedItinerary.get("AirItineraryPricingInfo");
 				 
@@ -91,7 +126,7 @@ public class FlightWebServiceClient
 				 
 				 JSONObject totalFare = (JSONObject) passengerFare.get("TotalFare");
 				 
-				 String amount = totalFare.get("Amount").toString();
+				  amount = Double.parseDouble(totalFare.get("Amount").toString());
 				 
 				 System.out.println(amount);
 				 
@@ -99,6 +134,10 @@ public class FlightWebServiceClient
 				 System.out.println(firstAirItinerary.get("DirectionInd").toString());
 				 
 				 System.out.println(firstPricedItinerary.get("SequenceNumber").toString());
+				 
+				 DisplayFlight display = new DisplayFlight(departureLocationCode,arrivalLocationCode,departureDateTime,arrivalDateTime,flightNumber,airlineCode,amount);
+			      
+				 arr_display.add(display);
 			}
 			
 	     }
@@ -107,11 +146,19 @@ public class FlightWebServiceClient
 			System.out.println(e);
 		}
 		
-		}
+		System.out.println(arr_display.size());
+		
+		
+		return arr_display;
+		
+}
 	
 	public static void main(String args[])throws IOException
 	{
 		FlightWebServiceClient client = new FlightWebServiceClient();
-		client.parseJSON("BOS","LAX", "2014-12-03","2014-12-10");
+		List<DisplayFlight> arr = client.parseJSON("BOS","LAX", "2014-12-03","2014-12-10");
+		
+		
+		
 	}
 }
