@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="css/bootstrap.css" rel="stylesheet"/>
 </head>
 <% 
 if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") == "")) 
