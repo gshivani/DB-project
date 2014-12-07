@@ -4,28 +4,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class FlightDao {
+public class UserAdminDao {
 
-	
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("FlightApp");
 	EntityManager em = null;
 	
-	
-	public FlightDao() {
+	public UserAdminDao() {
 		em = factory.createEntityManager();
 	}
-
 	
-	public Flight createFlight(Flight flight)
+	public UserAdmin findByUsername(String username,String password)
 	{
+		UserAdmin user = null;
 		em.getTransaction().begin();
-		em.persist(flight);
+		user= em.find(UserAdmin.class, username);
+		if(user!=null && user.getUsername()!=null)
+		{
+			em.getTransaction().commit();
+			return user;
+		}
 		em.getTransaction().commit();
-		return flight;
+		return null;
+		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

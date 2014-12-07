@@ -22,5 +22,10 @@
 		<input type ="submit" value="Create Account"/>
 		</form>
 		
+	<a href="adminLogin.jsp">Admin Login</a>
+
+
+	
+		
 </body>
 </html>

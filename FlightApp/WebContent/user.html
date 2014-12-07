@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/jquery.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+
+<div class="container">
+<h1>Users</h1>
+
+<input id="username" placeholder="Username" class="form-control"/>
+<input id="password" placeholder="password" class="form-control"/>
+<input id="firstname" placeholder="firstname" class="form-control"/>
+<input id="lastname" placeholder="lastname" class="form-control"/>
+<input id="dob" placeholder="dob" class="form-control"/>
+<input id="email" placeholder="Email" class="form-control"/>
+<input id="status" placeholder="status" class="form-control"/>
+<button id="create" class="btn btn-block btn-primary">Create</button>
+<button id="readAll" class="btn btn-block btn-primary">ReadAll</button>
+<button id="update" class="btn btn-block btn-primary">Update</button>
+<button id="delete" class="btn btn-block btn-primary">Delete</button>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+	//	var newUser = {"id":2,"username":"username333","email":"email333"};
+		
+//		updateUser(3, newUser);
+		
+	//	createUser(newUser);
+		$("#create").click(createHandler);
+		$("#update").click(updateHandler);
+		$("#readAll").click(readAllHandler);
+		$("#delete").click(deleteHandler);
+	});
+	
+	function createHandler() {
+		var newUser = {
+				"username":$("#username").val(),
+				"password":$("#password").val(),
+				"firstname":$("#firstname").val(),
+				"lastname":$("#lastname").val(),
+				"dob":$("#dob").val(),
+				"email":$("#email").val(),
+				"status":$("#status").val(),
+		};
+		createUser(newUser);
+	}
+	
+	function updateHandler() {
+		var newUser = {
+				"username":$("#username").val(),
+				"password":$("#password").val(),
+				"firstname":$("#firstname").val(),
+				"lastname":$("#lastname").val(),
+				"dob":$("#dob").val(),
+				"email":$("#email").val(),
+				"status":$("#status").val(),
+		};
+		updateUser($("#username").val(), newUser);
+	}
+
+	function readAllHandler(){
+		readUser();
+	}
+	
+	function deleteHandler(){
+		deleteUser($("#username").val());
+	}
+	
+	function deleteUser(username){
+		$.ajax({
+			url : "http://localhost:8080/FlightApp/rest/user/"+username,
+			type:"delete",
+			data: JSON.stringify(),
+			dataType: "json",
+			contentType: "application/json",
+			success:function(response) {
+				
+			}
+		});
+		
+	}
+	function updateUser(username, user) {
+		
+		$.ajax({
+			url : "http://localhost:8080/FlightApp/rest/user/"+username,
+			type:"put",
+			data: JSON.stringify(user),
+			dataType: "json",
+			contentType: "application/json",
+			success:function(response) {
+			}
+		});
+		
+	}
+	
+	function readUser(){
+		
+		$.ajax({
+			url : "http://localhost:8080/FlightApp/rest/user/",
+			type: "get",
+			data: JSON.stringify(),
+			dataType: "json",
+			contentType: "application/json",
+			success:function(data){
+				$.each(data, function(key, val){
+					var tr=$('<tr></tr>');
+			        $.each(val, function(k, v){
+			        $('<td>'+k+':'+'</td>').appendTo(tr);
+			        $('<td>'+v+'</td>').appendTo(tr);
+			        $('<td>'+'|'+'</td>').appendTo(tr);
+			        });
+			        tr.appendTo('#display');
+				});
+			}
+		});
+	}
+			
+		
+	
+
+	
+	function createUser(user) {
+		
+		$.ajax({
+			url : "http://localhost:8080/FlightApp/rest/user",
+			type:"post",
+			data: JSON.stringify(user),
+			dataType: "json",
+			contentType: "application/json",
+			success:function(response) {
+				console.log(response);
+			}
+		});
+		
+	}
+
+</script>
+
+<table id= "display">
+
+</table>
+
+
+</div>
+</body>
+</html>
