@@ -29,9 +29,17 @@ public class RatingDao {
 		em.getTransaction().begin();
 		Query q = em.createNamedQuery("Rating.findAvgByAirlineCode");
 		q.setParameter("airlineCode",airlineCode);
+		if(q.getSingleResult()==null)
+		{	
+			em.getTransaction().commit();
+			return 0.0;
+		}
+		else
+		{
 		avgrating = (double) q.getSingleResult();
 		em.getTransaction().commit();
 		return avgrating;
+		}
 		
 	}
 	

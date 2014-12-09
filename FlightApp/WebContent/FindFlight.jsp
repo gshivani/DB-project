@@ -4,8 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Find Flights</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+
+<style type="text/css">
+BODY {
+background-image: url('flight2.jpg'); 
+background-repeat: no-repeat; 
+background-size: 100%;
+}
+</style>
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -32,19 +40,26 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 %>
 <div class="container">
 	<h1>Find Flight</h1>
+	<div class="row">
+	<div class="col-md-2">
 	<form action="DisplayFlight.jsp" method="get">
 		Origin:
 		<input name="origin" class="form-control" value=""/>
 		Destination:
 		<input name="destination"  class="form-control"/>
-	    Departure Date: <input name = "depatureDate" type="text" id="datepicker">
-	    Arrival Date: <input name = "arrivalDate" type="text" id="datepicker1">
-	    <input type ="submit" value="DisplayFlight"/>
+		<p></p>
+	    Departure Date: <input name = "depatureDate" type="text" id="datepicker" class="form-control">
+	    Arrival Date: <input name = "arrivalDate" type="text" id="datepicker1" class="form-control">
+	    <p></p>
+	    <input type ="submit" value="DisplayFlight" class=" btn btn-success"/>
 				
 	</form>	
+	</div>
+	</div>
 </div>
 <%
 } %>
+
 </body>
 
 

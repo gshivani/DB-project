@@ -4,17 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin Login</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+<link href="css/flight.css" rel="stylesheet"/>
 </head>
 <body>
+ <div id="centered"> 
+
 <form action="adminLogin.jsp" method="get">
+
 		Admin Username
 		<input name="username" class="form-control" />
 		Admin Password
 		<input name="password"  class="form-control"/>
-		<input type ="submit" value="Login"/>
-   </form>	
+		<br>
+		<input type ="submit" value="Login" class= "btn btn-success"/>
+   </form>
+   	
+ 
    
    <%
    String username = request.getParameter("username");
@@ -49,5 +56,6 @@
    }
    
    %>
+     </div>
 </body>
 </html>

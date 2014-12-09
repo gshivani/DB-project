@@ -4,9 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Book Flight</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+<style type="text/css">
+BODY {
+background-image: url('clouds.jpg'); 
+background-size: 100%;
+}
+</style>
+
 </head>
+
+
 <% 
 if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") == "")) 
 { 
@@ -54,39 +63,42 @@ session.setAttribute("flightNumberSession", flightNumber);
  //System.out.println(total_amount);
 
 %>
-<form action="EnterPassengerDetails.jsp" class="form-control" method="get">
+<form action="EnterPassengerDetails.jsp" class="form-control" method="get" style="border: 0px solid #000000;background: transparent">
 <tr>
-<td>You are Booking with: </td>
-<td><input name="airlineCode" class="form-control" value="<%=airlineCode %>" /></td>
+<div class="row">
+<div class="col-md-5">
+<p style="color: black; font-weight: bold">You are Booking with: </p>
+<td><input name="airlineCode" class="form-control" value="<%=airlineCode %>" style="border: 0px solid #000000;"  readonly="readonly"/></td>
 <% for(int i=0; i<sizeOfArray; i++){
 	
 %>
 <p>
-<td>Departure Location: </td>
-<td><input name="departureLocation_<%=i %>" class="form-control" value="<%= departureLocationArray[i] %>" /></td>
+<p style="color: black; font-weight: bold">Departure Location: </p>
+<td><input name="departureLocation_<%=i %>" class="form-control" value="<%= departureLocationArray[i] %>" style="border: 0px solid #000000;" readonly="readonly"/></td>
 </p>
 <p>
-<td>Arrival Location: </td>
-<td><input name="arrivalLocation_"<%=i %>" class="form-control" value="<%= arrivalLocationArray[i] %>" /></td>
+<p style="color: black; font-weight: bold">Arrival Location: </p>
+<td><input name="arrivalLocation_"<%=i %>" class="form-control" value="<%= arrivalLocationArray[i] %>" style="border: 0px solid #000000;"  readonly="readonly"/></td>
 </p>
 <p>
-<td>Departure Date and Time: </td>
-<td><input name="departureDateTime_"<%=i %>" class="form-control" value="<%= departureDateTimeArray[i] %>" /></td>
+<p style="color: black; font-weight: bold">Departure Date and Time: </p>
+<td><input name="departureDateTime_"<%=i %>" class="form-control" value="<%= departureDateTimeArray[i] %>" style="border: 0px solid #000000;"  readonly="readonly"/></td>
 </p>
 <p>
-<td>Arrival Date and Time: </td>
-<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%= arrivalDateTimeArray[i] %>" /></td>
+<p style="color: black; font-weight: bold">Arrival Date and Time: </p>
+<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%= arrivalDateTimeArray[i] %>" style="border: 0px solid #000000;"  readonly="readonly"/></td>
 </p>
 <p>
-<td>Flight Number: </td>
-<td><input name="flightNumber_<%=i %>" class="form-control" value="<%= flightNumber[i] %>" /> </td>
+<p style="color: black; font-weight: bold">Flight Number: </p>
+<td><input name="flightNumber_<%=i %>" class="form-control" value="<%= flightNumber[i] %>" style="border: 0px solid #000000;"  readonly="readonly"/> </td>
 </p>
 
 <%}
 %>
-<td>The total Amount is: </td>
-<td><input name="amount" class="form-control" value="<%= amount %>"/></td>
-<p> Enter The Number Of Passengers
+<p style="color: black; font-weight: bold">The total Amount is: </p>
+<td><input name="amount" class="form-control" value="<%= amount %>" style="border: 0px solid #000000;"  readonly="readonly"/></td>
+<p style="color: black; font-weight: bold"> Enter The Number Of Passengers</p>
+<p>
 <td><select name="noOfPassengers" class = "form-control" >
 <option value="1">1</option>
 <option value="2">2</option>
@@ -96,17 +108,22 @@ session.setAttribute("flightNumberSession", flightNumber);
 </select>
 </td>
 </p>
-<p> Select Class
+<p style="color: black; font-weight: bold"> Select Class</p>
+<p>
 <td><select name="class" class = "form-control" >
 <option value="First Class">First Class</option>
 <option value="Business Class">Business Class</option>
 <option value="Economy">Economy</option>
 </p>
+<p></p>
 <p>
-<input type="submit" value="Confirm Booking"/>
+<input type="submit" value="Confirm Booking" class= "btn btn-success"/>
 </p>
+<p  style="color: black; font-weight: bold">Please Note: *Choosing First Class will increase your ticket price by $1000 and Business Class by $500</p> 
 </tr>
 </form>
+</div>
+</div>
 </body>
 <%} %>
 </html>

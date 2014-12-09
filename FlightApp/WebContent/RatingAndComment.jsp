@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Rating and Comments</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
@@ -42,12 +42,14 @@ else if(feedbackType!= null && feedbackType.equals("Modify Feedback")){
 	String oldcomment = oldc.getComment();
 %>
 
-<form>
+<form class= "form-control"  style="color: black; border: 0px solid #000000;background: transparent" align ="center">
 <tr>
-<td>Previous Rating: </td>
-<td><%= oldrating %></td>
+<br>
+<br>
 <td>Previous Comment</td>
 <td><%= oldcomment %></td>
+<td>Previous Rating: </td>
+<td><%= oldrating %></td>
 </tr>
 
 </form>
@@ -60,8 +62,10 @@ else if(feedbackType!= null && feedbackType.equals("Modify Feedback")){
 
 	%>
 	
-	<form>
+<form class= "form-control"  style="color: black; border: 0px solid #000000" align ="center"  >
 <tr>
+<br>
+<br>
 <td>New Comment: </td>
 <td><%= newcomment %></td>
 
@@ -83,13 +87,15 @@ else if(feedbackType!= null && feedbackType.equals("Modify Feedback")){
 }
 %>
 
-
-Thank you for your feedback!
-
-<form action= "UserProfile.jsp" method="get">Go back to User Profile</a>
-<td><input name="password" type="hidden" value="<%=password %>"/></td>
-<td><input name="username" type="hidden" value="<%=username %>"/></td>
-<td><input type="submit" value="Back to UserProfile"></td>
+<br>
+<br>
+<center>Thank you for your feedback!</center>
+<br>
+<br>
+<form action= "UserProfile.jsp" method="get" align= "center"  style="color: black">Go back to User Profile</a>
+<td><input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000" /></td>
+<td><input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000" /></td>
+<td><input type="submit" value="Back to UserProfile" class="btn btn-success"></td>
 
 </form>
 </body>

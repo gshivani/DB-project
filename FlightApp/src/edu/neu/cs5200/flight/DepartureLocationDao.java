@@ -1,8 +1,12 @@
 package edu.neu.cs5200.flight;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class DepartureLocationDao {
 	
@@ -22,6 +26,23 @@ public class DepartureLocationDao {
 		em.getTransaction().commit();
 		return departureLocation;
 	}
+	
+public List<DepartureLocation> findByItineraryId(int itineraryId){
+		
+	    List<DepartureLocation> itinerary = new ArrayList<DepartureLocation>();
+		em.getTransaction().begin();
+		Query q = em.createQuery("select d from DepartureLocation d where d.itineraryId = :itineraryId");
+		q.setParameter("itineraryId",itineraryId);
+		itinerary = (List<DepartureLocation>)q.getResultList();
+	    if(itinerary!=null)
+		{
+	    	em.getTransaction().commit();
+			return itinerary;
+		}
+	    em.getTransaction().commit();
+		return null;
+	}
+	
 
 	public static void main(String[] args) {
 
