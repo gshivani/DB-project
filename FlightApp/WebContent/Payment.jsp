@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, java.util.* , java.text.SimpleDateFormat"%>
+    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, edu.neu.cs5200.Daos.*, java.util.* , java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Payment</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
 </head>
 
@@ -121,7 +121,7 @@ else {
 <form action="UserProfile.jsp" method="get">
 <td><input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000;"/></td>
 <td><input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000;"/></td>
-
+<br>
 <td><input type ="submit" value="Go Back To Profile Page" class=" btn btn-warning"/></td>
 <a href="Logout.jsp">Logout</a>
 </form>

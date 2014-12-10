@@ -1,30 +1,34 @@
-package edu.neu.cs5200.flight;
+package edu.neu.cs5200.Daos;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class UserAdminDao {
+import edu.neu.cs5200.flight.Airline;
+
+public class AirlineDao {
 
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("FlightApp");
 	EntityManager em = null;
 	
-	public UserAdminDao() {
+	
+	public AirlineDao() {
 		em = factory.createEntityManager();
 	}
 	
-	public UserAdmin findByUsername(String username,String password)
+	
+	public Airline createFlight(Airline airline)
 	{
-		UserAdmin user = null;
 		em.getTransaction().begin();
-		user= em.find(UserAdmin.class, username);
-		if(user!=null && user.getUsername()!=null)
-		{
-			em.getTransaction().commit();
-			return user;
-		}
+		em.persist(airline);
 		em.getTransaction().commit();
-		return null;
-		
+		return airline;
 	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

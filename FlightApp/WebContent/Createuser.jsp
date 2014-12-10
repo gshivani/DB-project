@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, java.util.*"%>
+    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, edu.neu.cs5200.Daos.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +9,7 @@
 
 <style type="text/css">
 BODY {
-background-image: url('flight2.jpg'); 
+background-image: url('images/flight2.jpg'); 
 background-size: 100%;
 }
 </style>
@@ -33,7 +33,7 @@ background-size: 100%;
 <h1><center>Enter all Credentials</center></h1>
 
 <div class="row">
-<div class="col-md-5">
+<div align="center" class="col-md-5">
 
 <form action="UserCreateSucess.jsp" method="get"  style="color: black">
 

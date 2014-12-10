@@ -4,10 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Logout</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+<style type="text/css">
+BODY {
+background-image: url('images/planes.jpg'); 
+background-size: 100%;
+}
+
+
+
+</style>
 </head>
 <body>
-<a href='Login.jsp'>Login</a>
+<a href='Login.jsp' style = "color: red; font-weight: bold">Login</a>
 </body>
 </html>

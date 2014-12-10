@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, java.util.*"%>
+    pageEncoding="ISO-8859-1" import="edu.neu.cs5200.flight.*, edu.neu.cs5200.Daos.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 
 <style type="text/css">
 BODY {
-background-image: url('flights.png'); 
+background-image: url('images/clouds.jpg'); 
 background-size: 100%;
 }
 
@@ -84,7 +84,7 @@ if (username!= null)
 <p style="color: black">Your Frequent Flier Miles are: <%=points%></p>
 
 
-<input type ="submit" value="Find Flights" class="btn btn-primary"/>
+<input type ="submit" value="Find Flights" class="btn btn-warning"/>
 </table>
 </form>
 
@@ -132,8 +132,8 @@ if (username!= null)
 <p></p>
 <input name="password" type="hidden" value="<%=password %>" />
 <input name="username" type="hidden" value="<%=username %>" />
-<input name="feedback" type ="submit" value="Give Feedback" class="btn btn-primary"/>
-<input name="feedback" type="submit" value="Modify Feedback" class="btn btn-primary" />
+<input name="feedback" type ="submit" value="Give Feedback" class="btn btn-warning"/>
+<input name="feedback" type="submit" value="Modify Feedback" class="btn btn-warning" />
 </form>
 
 <p></p>
@@ -206,7 +206,7 @@ for(int i=0;i<bookings.size();i++)
 </div>
 </div>
 <p></p>
-<input name="cancelBooking" type="submit" value="Cancel Booking" class="btn btn-primary">
+<input name="cancelBooking" type="submit" value="Cancel Booking" class="btn btn-warning">
 </form>
 
 </div>
@@ -237,7 +237,7 @@ for(int i=0;i<bookings.size();i++)
 <input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000;"/>
 <input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000;"/>
 
-<input name="DisplayItinerary" type="submit" value="Display Itinerary" class="btn btn-primary">
+<input name="DisplayItinerary" type="submit" value="Display Itinerary" class="btn btn-warning">
 
 
 </form>

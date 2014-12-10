@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import com.sun.jersey.spi.container.ParamQualifier;
 
+import edu.neu.cs5200.Daos.UserDao;
 import edu.neu.cs5200.flight.*;
 // /rest/user
 @Path("/user")
