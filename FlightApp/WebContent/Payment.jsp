@@ -16,11 +16,12 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 %>
 
 <body>
-<form action="Payment.jsp" class="form-control" method="get" >
+<form action="Payment.jsp" class="form-control" method="get" style="border: 0px solid #000000;background: transparent">
 <%
 String paymentType = request.getParameter("PaymentType");
 double totalCost = Double.parseDouble(request.getParameter("totalAmount"));
 String username = (String)session.getAttribute("userId");
+String password = (String)session.getAttribute("password");
 String airlineCode = (String)session.getAttribute("airlineCode");
 String airlineClass = (String)session.getAttribute("airlineClass");
 int noOfPassengers = Integer.parseInt(request.getParameter("noOfPassengers"));
@@ -30,6 +31,8 @@ String passengerLastName[] = (String[])session.getAttribute("PassengerLastName")
 String PassengerAge[] = (String[])session.getAttribute("PassengerAge");
 String PassportNumber[] = (String[])session.getAttribute("PassportNumber");
 String PassengerGender[] = (String[])session.getAttribute("PassengerGender");
+
+
 
 String bookingDate = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
 String ffmstatus=null;
@@ -63,25 +66,40 @@ if (paymentType.equals ("ffm")) {
 	 } else {
 		 
 		 out.println("Sorry, You don't have enough Frequent Flier Miles.");
+		 %>
+		 <br>
+		 <br>
+		 <%
 		 out.println("Please choose payment type as 'Dollars'"); 
 		 ffmstatus="not redeemed";
 		 %>
-		 <form action= 'Payment.jsp' class= 'form-control' method = 'get'>
+		  <br>
+		 <br>
+		 <form action= 'Payment.jsp' class= 'form-control' method = 'get' style="border: 0px solid #000000;background: transparent">
 <p>
 	<td>Choose type of Payment: </td>
+	<p></p>
 	<td>Dollars</td>
+	<div class="row">
+	<div class="col-md-1">
 	<td><input name="PaymentType" class="form-control" type="radio" value="Dollars"></td>
+	</div>
 </p>
 <td><input name="totalAmount" class= "form-control" type="hidden" value="<%=totalCost %>"></td>
 <td><input name="noOfPassengers" class= "form-control" type="hidden" value="<%=noOfPassengers %>"></td>
-<input type ="submit" value="Payment"/>
+<input type ="submit" value="Payment" class= "btn btn-warning"/>
 </form>
+
+
 		 <%
 	 }
 } 
 
 else {
+		 %>
 		 
+		 <center>
+		 <%
 		 out.println("Payment of " + totalCost+" has been made.");
 		 out.println("Booking :<booking Id> Confirmed.");
 		 ffmstatus="not redeemed";
@@ -98,7 +116,16 @@ else {
 
 	 
 %>
+
 </form>
+<form action="UserProfile.jsp" method="get">
+<td><input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000;"/></td>
+<td><input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000;"/></td>
+
+<td><input type ="submit" value="Go Back To Profile Page" class=" btn btn-warning"/></td>
+<a href="Logout.jsp">Logout</a>
+</form>
+
 <%
 
 String departureLocation[] = (String[])session.getAttribute("departureLocationSession");
@@ -164,6 +191,7 @@ Passenger p2 = daoPassenger.createPassenger(p1);
 
 
 %>
+
 </body>
 <% }
 %>

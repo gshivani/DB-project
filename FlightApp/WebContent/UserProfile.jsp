@@ -4,11 +4,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>User Profile</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+<link href="css/flight.css" rel="stylesheet"/>
+
+<style type="text/css">
+BODY {
+background-image: url('flights.png'); 
+background-size: 100%;
+}
+
+
+
+</style>
 </head>
 <a href='Logout.jsp'>Logout</a>
 <body>
+
 <%
 String username = request.getParameter("username");
 String password = request.getParameter("password");
@@ -54,6 +66,7 @@ if (username!= null)
 		    points = ffm.getPoints();
 			
 			session.setAttribute("userId",u.getUsername());
+			session.setAttribute("password", u.getPassword());
 		}
 
   }
@@ -62,74 +75,125 @@ if (username!= null)
 %>
 
 <div class="container">
-<h1>User Profile</h1>
 <form action="FindFlight.jsp" method="get">
 <table>
 <tr>
-<p>Welcome!</p>
-<p><%=firstName %>   <%=lastName %> </p> 
-<p>Email Id: <%=email%></p>
-<p>Your Frequent Flier Miles are: <%=points%></p>
+<p style="color: black">Welcome!</p>
+<p style="color: black"><%=firstName %> <%=lastName %> </p> 
+<p style="color: black">Email Id: <%=email%></p>
+<p style="color: black">Your Frequent Flier Miles are: <%=points%></p>
 
 
-<input type ="submit" value="Find Flights"/>
+<input type ="submit" value="Find Flights" class="btn btn-primary"/>
 </table>
 </form>
+
+
 <form action="RatingAndComment.jsp" method="get">
-<p>Give Your Rating: 
+<p></p>
+<p></p>
+<p style="color: black">Give Your Rating: 
 
 <%
  BookingDao daoBooking = new BookingDao();
  List<Booking> bookRating = daoBooking.findByAirlineCodeUsername(username);
-	%><select name="airlineCode" class = "form-control">
+	%>
+	
+	<div class="row">
+	<div class="col-md-2">
+	<select name="airlineCode" class = "form-control">
 	
 <%	for(Booking b: bookRating)
 	{
 	%>
 	<option value="<%= b.getAirLineCode()%>"><%= b.getAirLineCode() %></option>
+  
     
 <% } %>
 </select>
-<select name="rating" class = "form-control" >
+</div>
+</div>
+<div class="row">
+<div class="col-md-2"><select name="rating" class = "form-control" >
 <option value="1">1</option>
 <option value="2">2</option>
 <option value="3">3</option>
 <option value="4">4</option>
 <option value="5">5</option>
-</select>
+</select></div>
+</div>
 </tr>
-Comment 
-
-<input type="text" name="comment">
-</p>
-<td><input name="password" type="hidden" value="<%=password %>"/></td>
-<td><input name="username" type="hidden" value="<%=username %>"/></td>
-<input name="feedback" type ="submit" value="Give Feedback"/>
-<input name="feedback" type="submit" value="Modify Feedback"/>
+<p style="color: black">Comment</p> 
+<div class="row">
+<div class="col-md-5">
+<input type="text" name="comment" class="form-control" />
+</div>
+</div>
+<p></p>
+<input name="password" type="hidden" value="<%=password %>" />
+<input name="username" type="hidden" value="<%=username %>" />
+<input name="feedback" type ="submit" value="Give Feedback" class="btn btn-primary"/>
+<input name="feedback" type="submit" value="Modify Feedback" class="btn btn-primary" />
 </form>
 
-<form action="DeleteBooking.jsp" method="get" class="form-control">
-<table>
-<td>Your Bookings</td>
+<p></p>
+<p></p>
+
+
+<p style="color: black">Your Bookings:</p>
+<form action="DeleteBooking.jsp" method="get" class="form-control" style="border: 0px solid #000000;background: transparent" >
 <%
 List<Booking> bookings = daoBooking.findByUsername(username);
 bookingIdArray = new int[bookings.size()];
 itineraryIdArray = new int[bookings.size()];
+%>
+<p style="color: black; font-weight: bold">
+<td>Booking ID</td>
+<input value="" style="border: 0px solid #000000;background: transparent" size="3" />
+<td>No. Of Tickets</td>
+<input value="" style="border: 0px solid #000000;background: transparent"  size="3"/>
+<td>Booking Date</td>
+<input value="" style="border: 0px solid #000000;background: transparent"  size="3"/>
+<td>Total Price</td>
+<input value="" style="border: 0px solid #000000;background: transparent"  size="3"/>
+<td>Airline Code</td>
+<input value="" style="border: 0px solid #000000;background: transparent"  size="3"/>
+<td>Airline Class</td>
+</p>
+<%
+
 for(int i=0;i<bookings.size();i++)
 {
 %>
-<tr>
+<table>
 <p>
-<td>BookingId: <%= bookings.get(i).getBookingId()%></td>
-<td>Number Of Tickets: <%= bookings.get(i).getNumberOfTickets() %></td>
-<td>Booking Date: <%= bookings.get(i).getBookingdate() %></td>
-<td>Total Price : <%= bookings.get(i).getTotalprice() %></td>
-<td>Airline Code: <%= bookings.get(i).getAirLineCode() %></td>
-<td>Airline Class: <%= bookings.get(i).getAirLineclass() %></td></p>
-</tr>
+<tr>
 
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getBookingId()%></td>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="12"/></td>
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getNumberOfTickets() %></td>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="15"/></td>
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getBookingdate() %></td>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="7"/></td>
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getTotalprice() %></td>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="10"/></td>
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getAirLineCode() %></td>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="9"/></td>
+<td style ="color: black; font-weight: bold"><%= bookings.get(i).getAirLineclass() %></td></p>
+<td><input value="" style="border: 0px solid #000000;background: transparent" size="12"/></td>
+</tr>
+</p>
 <% } %>
 
+
+<td><input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000;"/></td>
+<td><input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000;"/></td>
+
+</table>
+<p></p>
+<p style ="color: black">Select the Booking Id to Cancel Booking</p>
+<div class="row">
+<div class="col-md-2">
 <select name="bookingId" class = "form-control">
 	
 <%	for(Booking b: bookings)
@@ -138,13 +202,44 @@ for(int i=0;i<bookings.size();i++)
 	<option value="<%= b.getBookingId()%>"><%= b.getBookingId() %></option>
     
 <% } %>
-<td><input name="password" type="hidden" value="<%=password %>"/></td>
-<td><input name="username" type="hidden" value="<%=username %>"/></td>
-<td><input name="cancelBooking" type="submit" value="Cancel Booking"></td>
-</table>
+</select>
+</div>
+</div>
+<p></p>
+<input name="cancelBooking" type="submit" value="Cancel Booking" class="btn btn-primary">
 </form>
 
 </div>
 
+
+
+
+<form action="DisplayItinerary.jsp" method="get" class="form-control" style="border: 0px solid #000000;background: transparent" >
+<p></p>
+<br>
+<p></p>
+
+<p style ="color: black">Select the Booking Id to Display Itinerary</p>
+<div class="row">
+<div class="col-md-2">
+<select name="bookingId" class = "form-control">
+	
+<%	for(Booking b: bookings)
+	{
+	%>
+	<option value="<%= b.getBookingId()%>"><%= b.getBookingId() %></option>
+    
+<% } %>
+</select>
+</div>
+</div>
+<p></p>
+<input name="password" type="hidden" value="<%=password %>" style="border: 0px solid #000000;"/>
+<input name="username" type="hidden" value="<%=username %>" style="border: 0px solid #000000;"/>
+
+<input name="DisplayItinerary" type="submit" value="Display Itinerary" class="btn btn-primary">
+
+
+</form>
 </body>
 </html>

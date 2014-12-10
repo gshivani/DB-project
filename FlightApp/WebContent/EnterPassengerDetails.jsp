@@ -4,8 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Enter Passenger Details</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+
+<style type="text/css">
+BODY {
+background-image: url('flight3.jpg'); 
+background-size: 100%;
+}
+</style>
+
+
 </head>
 
 <% 
@@ -15,9 +24,9 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 } else {
 %>
 <body>
-<form action="DisplayPassengerDetails.jsp" class="form-control" method="post" >
+<form action="DisplayPassengerDetails.jsp" class="form-control" method="post" style="border: 0px solid #000000;background: transparent" >
 <tr>
-<h1>Passenger Details</h1>
+<h1 style="color: black; font-weight: bold">Passenger Details</h1>
 </tr>
 <% int noOfPassengers = 0;
   noOfPassengers = Integer.parseInt(request.getParameter("noOfPassengers"));
@@ -28,34 +37,40 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
   
   
 %>
+<div class="row">
+<div class="col-md-4">
 <input value="<%=noOfPassengers %>" name="noOfPassengers" type="hidden">
 <%
 for(int i=0;i<noOfPassengers;i++)
 { %>
     <tr>
     <p>
-    <td>Passenger First Name: </td>
+    <p style="color: black; font-weight: bold">Passenger First Name: </p>
 	<td><input name="PassengerFirstName_<%=i %>" id="PassengerFirstName" class="form-control" type="text" value=""></td>
 	
 	</p>
 	<p>
-    <td>Passenger Last Name: </td>
+    <p style="color: black; font-weight: bold">Passenger Last Name: </p>
 	<td><input name="PassengerLastName_<%=i %>" id="PassengerLastName" class="form-control" type="text" value=""></td>
 	</p>
 	<p>
-	<td>Passenger Age: </td>
+	<p style="color: black; font-weight: bold">Passenger Age: </p>
 	<td><input name="PassengerAge_<%=i %>" class="form-control" type="text" value=""></td>
 	</p>
 	<p>
-	<td>Passport Details: </td>
+	<p style="color: black; font-weight: bold">Passport Details: </p>
 	<td><input name="PassportNumber_<%=i %>" class="form-control" type="text" value=""></td>
 	</p>
 	<p>
-	<td>Gender: </td>
-	<td>Male</td>
+	<p style="color: black; font-weight: bold">Gender: </p>
+	<p style="color: black; font-weight: bold">Male</p>
+	<div class="row">
+	<div class="col-md-2">
 	<td><input name="PassengerGender_<%=i %>" class="form-control" type="radio" value="M"></td>
-	<td>Female: </td>
+	<p style="color: black; font-weight: bold">Female: </p>
 	<td><input name="PassengerGender_<%=i %>" class="form-control" type="radio" value="F"></td>
+	</div>
+	</div>
 	</p>	
 	</tr>
 <%
@@ -85,14 +100,16 @@ for(int i=0;i<noOfPassengers;i++)
 
      totalCost = amount*noOfPassengers;
 %>
-<td>Total Cost: <%= totalCost %></td>
+<p style="color: black; font-weight: bold">Total Cost: <%= totalCost %></p>
 <td><input name="totalCost" value="<%=totalCost %>" class="form-control" type="hidden" ></td>
 <td><input name="airlineCode" class="form-control" type="hidden" value="<%=airlineCode %>"></td>
 <td><input name="noOfPassengers" class="form-control" type="hidden" value="<%=noOfPassengers %>"></td>
 <td><input name="airlineClass" class="form-control" type="hidden" value="<%=airlineClass %>"></td>
 </p>
-<td><input name="submit" class="form-control" type="submit" value="Confirm Booking"></td>
+<td><input name="submit" class="form-control" type="submit" value="Confirm Booking" class= "btn btn-success" /></td>
 </form>
+</div>
+</div>
 </body>
 
 <% } %>

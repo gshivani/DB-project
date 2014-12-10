@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Display Passenger Details</title>
 <link href="css/bootstrap.css" rel="stylesheet"/>
+
+
 </head>
 
 <% 
@@ -15,7 +17,7 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 } else {
 %>
 <body>
-<form action="Payment.jsp" class="form-control" method="get" >
+<form action="Payment.jsp" class="form-control" method="get" style="border: 0px solid #000000;background: transparent">
 <% 
  int noOfPassengers = 0;
 double total_amount = 0.0;
@@ -54,6 +56,15 @@ for(int i=0;i<noOfPassengers;i++)
 }
 %>
 	Passenger Details are:
+	<p></p>
+	<table>
+	<td><input type="text" value= "First Name" style="border: 0px solid #000000;"  readonly="readonly" /></td>
+	<td><input type="text" value= "Last Name" style="border: 0px solid #000000;"  readonly="readonly" /></td>
+	<td><input type="text" value= "Age" style="border: 0px solid #000000;"  readonly="readonly" /></td>
+	<td><input type="text" value= "Passport Number" style="border: 0px solid #000000;"  readonly="readonly" /></td>
+	<td><input type="text" value= "Gender" style="border: 0px solid #000000;"  readonly="readonly" /></td>
+	
+	</table>
 <%
 for(int i=0;i<noOfPassengers;i++)
 {
@@ -61,13 +72,14 @@ for(int i=0;i<noOfPassengers;i++)
 	%>
 
 	<table>
+	
 	<p>
 	<tr>
-	<td><input type="text" value="<%=passengerFirstNamesession[i] %>"/>
-	<td><input type="text" value="<%=passengerLastNamesession[i] %>"/>
-	<td><input type="text" value="<%=passengerAgesession[i] %>"/>
-	<td><input type="text" value="<%=passportNumbersession[i] %>"/>
-	<td><input type="text" value="<%=passengerGendersession[i] %>"/> 
+	<td><input type="text" style="border: 0px solid #000000;"  readonly="readonly" value="<%=passengerFirstNamesession[i] %>"/>
+	<td><input type="text" style="border: 0px solid #000000;"  readonly="readonly" value="<%=passengerLastNamesession[i] %>"/>
+	<td><input type="text" style="border: 0px solid #000000;"  readonly="readonly" value="<%=passengerAgesession[i] %>"/>
+	<td><input type="text" style="border: 0px solid #000000;"  readonly="readonly" value="<%=passportNumbersession[i] %>"/>
+	<td><input type="text" style="border: 0px solid #000000;"  readonly="readonly" value="<%=passengerGendersession[i] %>"/> 
 	</tr>
 	</p>
 	</table>
@@ -91,13 +103,16 @@ for(int i=0;i<noOfPassengers;i++)
 
 <%
 
+double avgrating = 0.0;
 
 RatingDao daoRating = new RatingDao();
-double avgrating = daoRating.findAvgByAirlineCode(airlineCode);
+avgrating = daoRating.findAvgByAirlineCode(airlineCode);
 
 %>
 <td><%= avgrating %> stars</td>
 </tr>
+<tr>
+<td>Comments on the airline</td>
 <%
 CommentDao daoComment = new CommentDao();
 List<Comment> comments = daoComment.findByAirlineCode(airlineCode);
@@ -105,53 +120,65 @@ List<Comment> comments = daoComment.findByAirlineCode(airlineCode);
 for(Comment c : comments){
 %>
 <p>
-<td><%= c.getUsername() %> says: </td>
-<td><input name= "comment" class="form-control" value="<%= c.getComment() %>" /></td>
+
+<td>&nbsp <%= c.getUsername() %>&nbsp says: </td>
+<td><input name= "comment" class="form-control" value="<%= c.getComment() %>" readonly="readonly" /></td>
+
 </p>
+
 <%
 }
 
 %>
-
+</tr>
 
 <% for(int i=0; i<sizeOfArray; i++){
 	
 %>
 <p>
+<div class="row">
+<div class="col-md-3">
+<tr>
+<p>
+
 <td>Departure Location: </td>
-<td><input name="departureLocation_<%=i %>" class="form-control" value="<%= departureLocation[i] %>" /></td>
+
+<td><input name="departureLocation_<%=i %>" class="form-control" value="<%= departureLocation[i] %>" size= "4" readonly="readonly" /></td>
+
+<td>&nbsp Arrival Location: &nbsp</td>
+<td><input name="arrivalLocation_"<%=i %>" class="form-control" value="<%= arrivalLocation[i] %>" size= "4" readonly="readonly" /></td>
+
+
+<td>&nbsp Departure Date and Time:&nbsp </td>
+<td><input name="departureDateTime_"<%=i %>" class="form-control" value="<%= departureDateTime[i] %>" readonly="readonly" /></td>
+
+
+<td>&nbsp Arrival Date and Time: &nbsp </td>
+<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%= arrivalDateTime[i] %>" readonly="readonly"  /></td>
 </p>
-<p>
-<td>Arrival Location: </td>
-<td><input name="arrivalLocation_"<%=i %>" class="form-control" value="<%= arrivalLocation[i] %>" readonly="readonly" /></td>
-</p>
-<p>
-<td>Departure Date and Time: </td>
-<td><input name="departureDateTime_"<%=i %>" class="form-control" value="<%= departureDateTime[i] %>" /></td>
-</p>
-<p>
-<td>Arrival Date and Time: </td>
-<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%= arrivalDateTime[i] %>" /></td>
-</p>
+</tr>
+</div></div>
 
 <%
 }
 %>
+</p>
 <p><tr>The Airline Class is : <%= airlineClass %></tr></p>
-<p>
+
 	<td>Choose type of Payment: </td>
 	<td>Dollars</td>
 	<td><input name="PaymentType" class="form-control" type="radio" value="Dollars"></td>
 	<td>FrequentFlierMiles</td>
 	<td><input name="PaymentType" class="form-control" type="radio" value="ffm"></td>
-</p>
+
 <td><input name="totalAmount" class="form-control" type="hidden" value="<%= total_amount %>" /></td>
 <td><input name="noOfPassengers" class="form-control" type="hidden" value="<%= noOfPassengers %>" /></td>
 <p>
-<input type ="submit" value="Payment"/>
+
 </p>
 </table>
-
+<p></p>
+<input type ="submit" value="Payment" class = "btn btn-success" />
 </form>
 </body>
 <% } %>

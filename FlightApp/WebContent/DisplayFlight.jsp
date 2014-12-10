@@ -4,8 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link href="css/bootstrap.css" rel="stylesheet"/>
+<title>Display Flights</title>
+<link href="css/bootstrap.css" rel="stylesheet"/> 
+
+<style type="text/css">
+BODY {
+background-image: url('planes2.JPG'); 
+background-size: 100%;
+}
+</style>
+
 </head>
 
 <% 
@@ -15,6 +23,7 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 } else {
 %>
 <body>
+<div class="container">
 
 <% 
 	String origin = request.getParameter("origin");
@@ -22,6 +31,7 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 	String departureDate = request.getParameter("depatureDate");
 	String arrivalDate = request.getParameter("arrivalDate");
 	List<DisplayFlight> arr = new ArrayList<DisplayFlight>();
+	int size=0;
 	
 	
 	if(origin != null)
@@ -33,8 +43,9 @@ if ((session.getAttribute("userId") == null) || (session.getAttribute("userId") 
 
 <table class="table">
 <tr>
-<th>Flights </th>
+<h1>Flights </h1>
 </tr>
+
 <tr>
 
 
@@ -57,27 +68,32 @@ for(DisplayFlight array : arr){
 String arrivalLocationArray[] = new String[arrivalCode.size()];
 String departureDateTimeArray[] = new String[departureDateTime.size()];
 String arrivalDateTimeArray[] = new String[arrivalDateTime.size()];
-String airlineCodeArray[] = new String[airlineCode.size()];%>
-
+String airlineCodeArray[] = new String[airlineCode.size()];
+size=departureCode.size();%>
+<tr>
+<%for(int i=0;i<1;i++){ %>
+<td><input value="Departure Location" class="form-control" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
+<td><input value="Arrival Location" class="form-control" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
+<td><input value="Departure Date and Time" class="form-control" style="border: 0px solid #000000;" size="25" readonly="readonly"/></td>
+<td><input value="Arrival Date and Time" class="form-control" style="border: 0px solid #000000;" size="25" readonly="readonly"/></td>
+<td><input value="Flight Number" class="form-control" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
+<td><input value="Airline Code" class="form-control" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
+<% } %>
+</tr>
+<tr>
 <% for(int i=0;i<departureCode.size();i++){ %>
-<td>Departure Location</td> 
-<td><input name="departureLocation_<%=i %>" class="form-control" value="<%=departureCode.get(i)%>"/></td>
+<td><input name="departureLocation_<%=i %>" class="form-control" value="<%=departureCode.get(i)%>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
 <%departureLocationArray[i]=departureCode.get(i);%>
-<td>Arrival Location</td>
-<td><input name="arrivalLocation_<%=i %>" class="form-control" value="<%=arrivalCode.get(i) %>"/></td>
+<td><input name="arrivalLocation_<%=i %>" class="form-control" value="<%=arrivalCode.get(i) %>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
 <%arrivalLocationArray[i]=arrivalCode.get(i);%>
-<td>Departure Date and Time</td>
-<td><input name="departureDateTime_<%=i %>" class="form-control" value="<%=departureDateTime.get(i) %>"/></td>
+<td><input name="departureDateTime_<%=i %>" class="form-control" value="<%=departureDateTime.get(i) %>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
 <%departureDateTimeArray[i]=departureDateTime.get(i);%>
-<td>Arrival Date and Time</td>
-<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%=arrivalDateTime.get(i) %>"/></td>
+<td><input name="arrivalDateTime_<%=i %>" class="form-control" value="<%=arrivalDateTime.get(i) %>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
 <%arrivalDateTimeArray[i]=arrivalDateTime.get(i);%>
-<td>Flight Number</td>
-<td><input name="flightNumber_<%=i %>" class="form-control" value="<%=flightNumber.get(i) %>"/></td>
-<td>Airline Code</td>
-<td><input name="airlineCode" class="form-control" value="<%=airlineCode.get(i) %>"/></td>
+<td><input name="flightNumber_<%=i %>" class="form-control" value="<%=flightNumber.get(i) %>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
+<td><input name="airlineCode" class="form-control" value="<%=airlineCode.get(i) %>" style="border: 0px solid #000000;" size="20" readonly="readonly"/></td>
 <%airlineCodeArray[i]=airlineCode.get(i);%>
-
+</tr>
 
 <%System.out.println("DepartureLocationArray"+departureLocationArray.length);
 for(int j=0;j<departureLocationArray.length;j++){
@@ -100,10 +116,12 @@ session.setAttribute("airlineCodeArray",airlineCodeArray);
 
 
 <%} %>
-<td>Amount</td>
-<td><input name="amount" class="form-control" value="<%= amount %>"/></td>
+<td><input value="Amount    $" style="border: 0px solid #000000; font-weight: bold" class="form-control" readonly="readonly" />
+<td><input name="amount" class="form-control" value="<%= amount %>" style="border: 0px solid #000000;" readonly="readonly"/></td>
 <td><input name="sizeOfArray" class="form-control" value="<%=departureLocationArray.length  %>" type="hidden"/></td>
-<td> <input type ="submit" value="Book Flight"/>
+<td></td>
+<td></td>
+<td> <input type ="submit" value="Book Flight" class="btn btn-warning"/>
 </td>
 
 
@@ -113,7 +131,7 @@ session.setAttribute("airlineCodeArray",airlineCodeArray);
 </tr>
 </table>
 
-
+</div>
 </body>
 <%} %>
 </html>

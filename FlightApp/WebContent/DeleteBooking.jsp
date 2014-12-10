@@ -36,7 +36,7 @@ Your Booking has been Cancelled
 <td>
 <td><input name="password" type="hidden" value="<%=password %>"/></td>
 <td><input name="username" type="hidden" value="<%=username %>"/></td>
-<td><input name="UserProfile" type="submit" value="Go Back to User Profile"></td>
+<td><input name="UserProfile" type="submit" value="Go Back to User Profile" class="btn btn-primary"/></td>
 </td>
 </form>
 </body>
